@@ -1,0 +1,20 @@
+<div *ngIf="usersDataSource.data.length > 0">
+
+  <h3>Full State Debug</h3>
+  <pre>{{ fullState$ | async | json }}</pre>
+  <h3>Users Data</h3>
+
+  <mat-table [dataSource]="usersDataSource">
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let user">{{ user.name }}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onSelectUser(row.id)">
+    </mat-row>
+  </mat-table>
+</div>
+<div *ngIf="usersDataSource.data.length === 0">
+  No users available.
+</div>
